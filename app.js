@@ -9,10 +9,6 @@ const session = require('express-session');
 const flash = require('express-flash');
 const methodOverride = require('method-override')
 
-var indexRouter = require('./routes/index');
-var userRouter = require('./routes/user');
-var storeRouter = require('./routes/store');
-var accountRouter = require('./routes/account');
 var adminRouter = require('./routes/admin');
 var app = express();
 
@@ -40,12 +36,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'))
 
-app.use('/', indexRouter);
-app.use('/user', userRouter);
-app.use('/store', storeRouter);
-app.use('/account', accountRouter);
 app.use('/admin', adminRouter);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

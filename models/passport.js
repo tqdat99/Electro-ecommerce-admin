@@ -5,7 +5,8 @@ var pool = database.pool
 
 function initialize(passport) {
     const authenticateUser = async(username, password, done) => {
-        query = 'select * from "Users" where username = \'' + username + '\''
+        query = 'select * from "Admins" where username = \'' + username + '\''
+        console.log(query)
         pool.query(query, async(err, res) => {
             user = null
             if (res.rows.length > 0)
@@ -41,7 +42,6 @@ function initialize(passport) {
     passport.deserializeUser((user, done) => {
         return done(null, user);
     });
-
 }
 
 module.exports = initialize;

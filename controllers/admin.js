@@ -1,8 +1,6 @@
 const bcrypt = require('bcrypt');
-// const passportAdmin = require('passport');
-var Passport = require('passport').Passport,
-    passportAdmin = new Passport()
-const initializeAdmin = require('../models/passport-admin');
+const passportAdmin = require('passport');
+const initializeAdmin = require('../models/passport');
 initializeAdmin(passportAdmin);
 
 var adminModel = require('../models/admin')
