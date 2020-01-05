@@ -13,13 +13,13 @@ module.exports.getAllAdmins = function(callback) {
     })
 }
 
-module.exports.addAdmins = async function(user) {
+module.exports.addAdmin = async function(user) {
     const hasedPw = await bcrypt.hash(user.password, 10)
     user.password = hasedPw
 
     const query = {
-        text: 'insert into "Admins" values($1, $2, $3, $4, $5, $6, $7, $8, $9)',
-        values: [user.username, user.password, 'available', 0],
+        text: 'insert into "Admins" values($1, $2, $3, $4)',
+        values: [user.username, user.password, 0, 'available'],
     }
 
     pool.query(query, (err, res) => {
@@ -28,11 +28,16 @@ module.exports.addAdmins = async function(user) {
     })
 }
 
-module.exports.editUserByUsername = function(form) {
-    query = "update \"Admins\" set password = '" + form.password + "'"
+module.exports.changAdminPasswordByUsername = async function(username, password) {
+    const hasedPw = await bcrypt.hash(password, 10)
+
+    query = "update \"Admins\" set password = '" + hasedPw + "' where username = '" + username + "'"
     console.log(query)
-    pool.query(query, function(err, result) {
-        console.log(result)
+
+    pool.query(query, (err, res) => {
+        console.log(res)
+        if (err)
+            console.log(err.stack)
     })
 }
 
@@ -46,14 +51,32 @@ module.exports.unlockUser = function(username) {
     pool.query(query, function(err, result) {})
 }
 
-module.exports.findUserByUsername = function(username, callback) {
+module.exports.findAdminByUsername = function(username, callback) {
     query = 'select * from "Admins" where username = \'' + username + '\''
     pool.query(query, async(err, res) => {
+        // console.log(res)
         if (res.rows.length > 0)
             callback(res.rows[0])
         else
             callback(null)
     })
+}
+
+module.exports.deleteAdminByUsername = function(username, callback) {
+    query = "delete from \"Admins\" where username = '" + username + "'"
+    pool.query(query, function(err, result) {
+        callback(result)
+    })
+}
+
+module.exports.lockAdmin = function(username) {
+    query = "update \"Admins\" set status = \'locked\' where username = \'" + username + "\'"
+    pool.query(query, function(err, result) {})
+}
+
+module.exports.unlockAdmin = function(username) {
+    query = "update \"Admins\" set status = \'available\' where username = \'" + username + "\'"
+    pool.query(query, function(err, result) {})
 }
 
 module.exports.validatePassword = function(password, callback) {

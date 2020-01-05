@@ -7,6 +7,7 @@
     },
     "dependencies": {
         "app-root-path": "^3.0.0",
+        "base64-img": "^1.0.4",
         "bcrypt": "^3.0.7",
         "connect-pg-simple": "^6.0.1",
         "cookie-parser": "~1.4.4",
@@ -19,6 +20,7 @@
         "formidable": "^1.2.1",
         "fs": "0.0.1-security",
         "http-errors": "~1.6.3",
+        "image-to-base64": "^2.0.1",
         "method-override": "^3.0.0",
         "morgan": "~1.9.1",
         "multiparty": "^4.2.1",

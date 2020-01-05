@@ -9,7 +9,16 @@ const session = require('express-session');
 const flash = require('express-flash');
 const methodOverride = require('method-override')
 
-var adminRouter = require('./routes/admin');
+var indexRouter = require('./routes/index');
+var advertisementRouter = require('./routes/advertisements');
+var userRouter = require('./routes/users');
+var adminRouter = require('./routes/admins');
+var typeRouter = require('./routes/types.js');
+var productRouter = require('./routes/products');
+var saleRouter = require('./routes/sales');
+var orderRouter = require('./routes/orders');
+//var top = require('./routes/top');
+
 var app = express();
 
 // view engine setup
@@ -36,7 +45,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'))
 
-app.use('/admin', adminRouter);
+app.use('/', indexRouter);
+app.use('/users', userRouter);
+app.use('/admins', adminRouter);
+app.use('/types', typeRouter);
+app.use('/products', productRouter);
+app.use('/advertisements', advertisementRouter);
+app.use('/sales', saleRouter);
+//app.use('/top', topRouter);
+app.use('/orders', orderRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -53,32 +71,5 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
-
-var http = require('http');
-var formidable = require('formidable');
-var fs = require('fs');
-
-http.createServer(function(req, res) {
-    if (req.url == '/fileupload') {
-        var form = new formidable.IncomingForm();
-        form.parse(req, function(err, fields, files) {
-            console.log(files)
-            var oldpath = files.filetoupload.path;
-            var newpath = __dirname + '/' + files.filetoupload.name;
-            fs.rename(oldpath, newpath, function(err) {
-                if (err) throw err;
-                res.write('File uploaded and moved!');
-                res.end();
-            });
-        });
-    } else {
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.write('<form action="fileupload" method="post" enctype="multipart/form-data">');
-        res.write('<input type="file" name="filetoupload"><br>');
-        res.write('<input type="submit">');
-        res.write('</form>');
-        return res.end();
-    }
-}).listen(8080);
 
 module.exports = app;

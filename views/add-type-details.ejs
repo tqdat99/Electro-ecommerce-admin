@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Electro - HTML Ecommerce Template</title>
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="css/slick-theme.css" />
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="css/nouislider.min.css" />
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
+
+</head>
+
+<body>
+    <% include nav-bar.ejs%>
+
+        <div class="container">
+            <div class="row ">
+                <div class="col-lg-6">
+                    <h3>Thêm loại cửa hàng</h3>
+                    <form action="/types/add" enctype="multipart/form-data" method="post">
+                        <div class="form-group">
+                            <label class="label-product-form">ID cửa hàng</label>
+                            <input type="text" class="form-control" name="id" placeholder="Dienthoai" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-product-form">Tên cửa hàng</label>
+                            <input type="text" class="form-control" name="ten" placeholder="Điện thoại" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-product-form">Ảnh cửa hàng</label>
+                            <input type="file" name="anh" required accept="image/*">
+                        </div>
+                        <div class="form-group ">
+                            <label class="label-product-form">Prefix</label>
+                            <input type="text" class="form-control" name="prefix" placeholder="DT" required>
+                        </div>
+                        <div class="form-group ">
+                            <button type="submit" value="submit" class="button">Thêm</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- jQuery Plugins -->
+        <script src="js/jquery.min.js "></script>
+        <script src="js/bootstrap.min.js "></script>
+        <script src="js/slick.min.js "></script>
+        <script src="js/nouislider.min.js "></script>
+        <script src="js/jquery.zoom.min.js "></script>
+        <script src="js/main.js "></script>
+        <script type="text/javascript" src="http://example.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://example.com/image-uploader.min.js"></script>
+</body>
+
+</html>

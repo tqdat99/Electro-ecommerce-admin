@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Electro - HTML Ecommerce Template</title>
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="css/slick-theme.css" />
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="css/nouislider.min.css" />
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+</head>
+
+<body>
+    <% include nav-bar.ejs%>
+
+        <div class="container">
+            <div class="row ">
+                <div class="col-lg-6">
+                    <h3>Thông tin chi tiết</h3>
+                    <h4>Tên tài khoản</h4>
+                    <p>
+                        <%=user.username%>
+                    </p>
+                    <h4>Trạng thái</h4>
+                    <p>
+                        <%=user.status%>
+                    </p>
+                    <button type="button" class="button btn-primary" data-toggle="modal" data-target="#pwChangeModal" style="margin-bottom: 16px;">Đổi mật khẩu</button>
+                    <div class="modal fade center" id="pwChangeModal" tabindex="-1" role="dialog" aria-labelledby="pwChangeModal" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="pwChangeModal" style="display:inline">Đổi mật khẩu</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/admins/change-password" method="post">
+                                        <div class="form-group">
+                                            <label for="username" class="col-form-label">Tài khoản admin</label>
+                                            <input type="text" class="form-control" name="username" value="<%=user.username%>" readonly="readonly">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password" class="col-form-label">Nhập mật khẩu mới</label>
+                                            <input type="password" class="form-control" name="password" id="password" onchange="validatePw()">
+                                        </div>
+                                        <p id="pwChangeNoti">Mật khẩu phải có ít nhất 6 ký tự</p>
+                                        <div class="form-group">
+                                            <button type="submit" class="button" id="submitBtn" disabled>Lưu</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% if (user.status=='locked' && user.root != 1){%>
+                        <form action="/admins/unlock?username=<%=user.username%>" method="post">
+                            <button type="submit" class="button btn-danger" style="margin-bottom: 16px;">Mở khóa</button>
+                        </form>
+                        <% } else if (user.status!='locked' && user.root != 1){ %>
+                            <form action="/admins/lock?username=<%=user.username%>" method="post">
+                                <button type="submit" class="button btn-danger" style="margin-bottom: 16px;">Khóa</button>
+                            </form>
+                            <% } %>
+                                <%if (user.root != 1) {%>
+                                    <form action="/admins/delete?username=<%=user.username%>" method="post">
+                                        <button type="submit" class="button btn-danger" style="background-color: #F01D4F; border-color: #F01D4F;">Xóa</button>
+                                    </form>
+                                    <% } %>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- jQuery Plugins -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/slick.min.js"></script>
+        <script src="js/nouislider.min.js"></script>
+        <script src="js/jquery.zoom.min.js"></script>
+        <script src="js/main.js"></script>
+        <script>
+            function validatePw() {
+                var noti = document.getElementById('pwChangeNoti'),
+                    pwField = document.getElementById('password'),
+                    submitBtn = document.getElementById('submitBtn'),
+                    password = pwField.value;
+                noti.innerHTML = "Mật khẩu phải có ít nhất 6 ký tự"
+                if (password.length < 6)
+                    noti.innerHTML = "Mật khẩu phải có ít nhất 6 ký tự"
+                else {
+                    noti.innerHTML = ""
+                    submitBtn.removeAttribute("disabled")
+                }
+            }
+        </script>
+
+</body>
+
+</html>
