@@ -47,6 +47,7 @@
 </head>
 
 <body>
+
     <% include nav-bar.ejs%>
         <section class="cart_area">
             <div class="container">
@@ -160,6 +161,12 @@
                 </form>
 
                 <div class="col-md-9">
+                    <div class="header-search" style="margin-bottom: 24px;">
+                        <form action="/products" method="get">
+                            <input class="input" name="key" placeholder="Tìm kiếm sản phẩm">
+                            <button class="search-btn">Tìm</button>
+                        </form>
+                    </div>
 
                     <div class="col" style="padding-bottom: 24px">
                         <a href="products/add" class="flex-row-reverse" style="display: block;">

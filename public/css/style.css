@@ -482,7 +482,7 @@ Search
     }
     
     .header-search form .input {
-        width: calc(100% - 260px);
+        width: calc(100% - 160px);
         margin-right: -4px;
     }
     

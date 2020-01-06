@@ -84,7 +84,7 @@ module.exports.productList = function(req, res) {
     productModel.getProductList(key, type, brand, price, order, function(items) {
         // console.log(page + "," + items.length + "," + perPage + "," + Math.ceil(items.length / perPage))
         // console.log(items)
-        productModel.getProductTypes(function(types) {
+        typeModel.getAllTypes(function(types) {
             productModel.getProductBrands(function(brands) {
                 onPageItems = items.slice(perPage * (page - 1), perPage * (page - 1) + 9)
                     //console.log(brands)
