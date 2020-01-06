@@ -59,7 +59,7 @@ module.exports.getToptList = function(type, brand, order, callback) {
 
     query += "group by products.id order by sum(quantity) " + order + " limit 10"
 
-    console.log(query)
+    //console.log(query)
     pool.query(query, function(err, result) {
         //console.log(result.rows)
         callback(result.rows);

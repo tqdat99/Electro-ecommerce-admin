@@ -35,9 +35,9 @@ module.exports.editUserByUsername = function(form) {
     //     }
     query = "update \"Users\" set password = '" + form.password + "', fullname = '" + form.fullname + "', birthday = '" + form.birthday +
         "', address = '" + form.address + "', phone = '" + form.phone + "' where username = '" + form.username + "'"
-    console.log(query)
+        //console.log(query)
     pool.query(query, function(err, result) {
-        console.log(result)
+        //console.log(result)
     })
 }
 
@@ -82,7 +82,7 @@ module.exports.checkNotAuthenticated = function(req, res, next) {
 }
 
 module.exports.authenticateUser = function(req, res, next) {
-    console.log('yes')
+    //console.log('yes')
     passport.authenticate('local', {
         successRedirect: '/',
         failureRedirect: '/user/login',

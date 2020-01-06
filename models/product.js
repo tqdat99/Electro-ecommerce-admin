@@ -60,7 +60,13 @@ module.exports.getProductList = function(key, type, brand, price, order, callbac
     condition = 0
 
     if (key != undefined) {
-        query += "(to_tsvector(ten) @@ to_tsquery('" + key + "'))"
+        //console.log(key)
+        query += "(to_tsvector(ten) @@ to_tsquery("
+        keys = key.split(" ")
+        for (i = 0; i < keys.length; i++) {
+            query += "'" + keys[i] + "'";
+        }
+        query += "))"
         if (type != undefined && condition == 0) {
             if (type.length > 0 && type[0] != "All") {
                 condition = 1;
@@ -124,7 +130,7 @@ module.exports.getProductList = function(key, type, brand, price, order, callbac
     query += " ORDER BY gia " + order;
 
 
-    console.log(query)
+    //console.log(query)
     pool.query(query, function(err, result) {
         //console.log(result.rows)
         callback(result.rows);
@@ -132,14 +138,14 @@ module.exports.getProductList = function(key, type, brand, price, order, callbac
 }
 
 module.exports.editProductById = function(form, callback) {
-    console.log("form.anh: " + form.anh.length)
+    //console.log("form.anh: " + form.anh.length)
     if (form.anh.length > 30)
         query = "update \"products\" set ten = '" + form.ten + "', gia = '" + form.gia + "', mota = '" + form.mota +
         "', anh = '" + form.anh + "', loai = '" + form.loai + "', brand ='" + form.brand + "', kho ='" + form.kho + "' where id = '" + form.id + "'"
     else {
         query = "update \"products\" set ten = '" + form.ten + "', gia = '" + form.gia + "', mota = '" + form.mota +
             "', loai = '" + form.loai + "', brand ='" + form.brand + "', kho ='" + form.kho + "' where id = '" + form.id + "'"
-        console.log(query)
+            //console.log(query)
     }
     pool.query(query, function(err, result) {
         //console.log("editProductById2")
