@@ -43,9 +43,10 @@ module.exports.salesManage = function(req, res) {
         page = req.query.page
 
     saleModel.getSales(from, to, function(items) {
+        console.log(items)
         sumSale = 0
         for (i = 0; i < items.length; i++)
-            sumSale += items[i].sum
+            sumSale += parseInt(items[i].sum, 10)
         onPageItems = items.slice(perPage * (page - 1), perPage * (page - 1) + 9)
         res.render('manage-sales', {
             From: from,
