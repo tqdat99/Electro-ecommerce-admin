@@ -47,6 +47,7 @@ module.exports.orderDetails = function(req, res) {
     orderModel.findOrderById(orderid, function(order) {
         orderModel.getOrderStatusById(orderid, function(status) {
             orderModel.getOrderProductsById(orderid, function(products) {
+                //console.log(products)
                 var CreatedAt, Shipping, ShippedAt, CanceledAt
                 for (i = 0; i < status.length; i++) {
                     if (status[i].status == '1')
