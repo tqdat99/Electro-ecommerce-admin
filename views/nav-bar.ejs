@@ -75,7 +75,7 @@
                         <%}%>
                             <li id="types"><a href="/types?page=1">Cửa hàng</a></li>
                             <li id="products"><a href="/products?type=All">Sản phẩm</a></li>
-                            <li id="advertisements"><a href="/advertisements?page=1">Quảng cáo</a></li>
+                            <li id="banners"><a href="/banners?page=1">Quảng cáo</a></li>
                             <li id="orders"><a href="/orders?page=1">Đơn hàng</a></li>
                             <li id="sales"><a href="/sales">Doanh số</a></li>
                             <li id="top"><a href="/top?type=All">Top 10</a></li>
@@ -123,8 +123,8 @@
     } else if (currentHref.includes('top')) {
         nav = document.getElementById("top")
         nav.setAttribute("class", "active")
-    } else if (currentHref.includes('advertisements')) {
-        nav = document.getElementById("advertisements")
+    } else if (currentHref.includes('banners')) {
+        nav = document.getElementById("banners")
         nav.setAttribute("class", "active")
     } else if (currentHref.includes('types')) {
         nav = document.getElementById("types")

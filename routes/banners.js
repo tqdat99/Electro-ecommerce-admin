@@ -3,7 +3,7 @@ var router = express.Router();
 router.use(express.static('public'));
 
 var adminController = require('../controllers/admins');
-var advertisementController = require('../controllers/advertisements');
+var advertisementController = require('../controllers/banners');
 
 router.get('/details', adminController.checkAuthenticated, advertisementController.advertisementDetails);
 router.post('/edit', adminController.checkAuthenticated, advertisementController.advertisementEdit);

@@ -6,7 +6,7 @@ var indexController = require('../controllers/index');
 var userController = require('../controllers/users');
 var adminController = require('../controllers/admins');
 var productController = require('../controllers/products');
-var advertisementController = require('../controllers/advertisements');
+var advertisementController = require('../controllers/banners');
 var typeController = require('../controllers/types');
 var orderController = require('../controllers/orders');
 var topController = require('../controllers/top');
@@ -23,7 +23,7 @@ router.get('/users', adminController.checkAuthenticated, userController.userList
 router.get('/admins', adminController.checkAuthenticated, adminController.adminList);
 router.get('/types', adminController.checkAuthenticated, typeController.typeList);
 router.get('/products', adminController.checkAuthenticated, productController.productList);
-router.get('/advertisements', adminController.checkAuthenticated, advertisementController.advertisementList);
+router.get('/banners', adminController.checkAuthenticated, advertisementController.advertisementList);
 router.get('/orders', adminController.checkAuthenticated, orderController.orderList);
 router.get('/top', adminController.checkAuthenticated, topController.topList);
 router.get('/sales', adminController.checkAuthenticated, saleController.salesManage);

@@ -10,7 +10,7 @@ const flash = require('express-flash');
 const methodOverride = require('method-override')
 
 var indexRouter = require('./routes/index');
-var advertisementRouter = require('./routes/advertisements');
+var bannerRouter = require('./routes/banners');
 var userRouter = require('./routes/users');
 var adminRouter = require('./routes/admins');
 var typeRouter = require('./routes/types.js');
@@ -50,7 +50,7 @@ app.use('/users', userRouter);
 app.use('/admins', adminRouter);
 app.use('/types', typeRouter);
 app.use('/products', productRouter);
-app.use('/advertisements', advertisementRouter);
+app.use('/banners', bannerRouter);
 app.use('/sales', saleRouter);
 //app.use('/top', topRouter);
 app.use('/orders', orderRouter);

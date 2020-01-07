@@ -3,13 +3,10 @@ const passportAdmin = require('passport');
 const initializeAdmin = require('../models/passport');
 initializeAdmin(passportAdmin);
 
-var adminModel = require('../models/admin')
-var userModel = require('../models/user')
-var productModel = require('../models/product')
-var advertisementModel = require('../models/advertisement')
+var bannerModel = require('../models/banner')
 
 var formidable = require('formidable')
-
+var base64Img = require('base64-img');
 
 module.exports.advertisementList = function(req, res) {
 
@@ -24,7 +21,7 @@ module.exports.advertisementList = function(req, res) {
     if (req.query.page != undefined)
         page = req.query.page
 
-    advertisementModel.getAllAdvertisements(function(items) {
+    bannerModel.getAllAdvertisements(function(items) {
         onPageItems = items.slice(perPage * (page - 1), perPage * (page - 1) + perPage)
         res.render('manage-advertisements', {
             admin: req.user,
@@ -38,7 +35,7 @@ module.exports.advertisementList = function(req, res) {
 
 module.exports.advertisementDetails = function(req, res) {
     //console.log(req.query)
-    advertisementModel.getAdvertisementById(req.query.id, function(ad) {
+    bannerModel.getAdvertisementById(req.query.id, function(ad) {
         //console.log(ad)
         res.render('manage-advertisement-details', {
             advertisement: ad,
@@ -55,12 +52,12 @@ module.exports.advertisementEdit = function(req, res) {
     new formidable.IncomingForm().parse(req, async function(err, fields, file) {
             form.id = fields.id
             form.link = fields.link
-            redirect = "/advertisements/details?id=" + form.id
+            redirect = "/banners/details?id=" + form.id
             if (file.anh.size > 0) {
                 console.log(file)
                 form.anh = await base64Img.base64Sync(file.anh.path);
             }
-            advertisementModel.editAdvertisementById(form, function(resultEdit) {
+            bannerModel.editAdvertisementById(form, function(resultEdit) {
                 // console.log(redirect)
                 res.redirect(redirect)
             })
@@ -94,12 +91,12 @@ module.exports.advertisementAdd = function(req, res) {
     var form = { id: "", anh: "", link: "" }
 
     new formidable.IncomingForm().parse(req, function(err, fields, file) {
-            advertisementModel.getNextIdForAdvertisementAdd(function(nextId) {
+            bannerModel.getNextIdForAdvertisementAdd(function(nextId) {
                 console.log("nextId: " + nextId)
                 form.id = nextId
                 form.link = fields.link
-                redirect = "/advertisements/details?id=" + form.id
-                advertisementModel.addAdvertisement(form, function(addResult) {
+                redirect = "/banners/details?id=" + form.id
+                bannerModel.addAdvertisement(form, function(addResult) {
                     console.log(redirect)
                     res.redirect(redirect)
                 })
@@ -126,16 +123,16 @@ module.exports.advertisementAdd = function(req, res) {
 }
 
 module.exports.advertisementRemove = function(req, res) {
-    advertisementModel.removeAdvertisementById(req.query.id, function(result) {
+    bannerModel.removeAdvertisementById(req.query.id, function(result) {
         console.log("yes")
-        res.redirect('/advertisements')
+        res.redirect('/banners')
     })
 }
 
 module.exports.advertisementLock = function(req, res) {
     console.log('advertisementLock')
-    redirect = "/advertisements/details?id=" + req.query.id
-    advertisementModel.lockAdvertisementById(req.query.id, function(result) {
+    redirect = "/banners/details?id=" + req.query.id
+    bannerModel.lockAdvertisementById(req.query.id, function(result) {
         console.log(redirect)
         res.redirect(redirect)
     })
@@ -143,8 +140,8 @@ module.exports.advertisementLock = function(req, res) {
 
 module.exports.advertisementUnlock = function(req, res) {
     console.log('advertisementUnlock')
-    redirect = "/advertisements/details?id=" + req.query.id
-    advertisementModel.unlockAdvertisementById(req.query.id, function(result) {
+    redirect = "/banners/details?id=" + req.query.id
+    bannerModel.unlockAdvertisementById(req.query.id, function(result) {
         console.log(redirect)
         res.redirect(redirect)
     })

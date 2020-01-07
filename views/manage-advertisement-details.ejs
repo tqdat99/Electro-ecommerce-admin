@@ -37,7 +37,7 @@
             <div class="row ">
                 <div class="col-lg-6">
                     <h3>Chỉnh sửa quảng cáo</h3>
-                    <form action="/advertisements/edit" enctype="multipart/form-data" method="post">
+                    <form action="/banners/edit" enctype="multipart/form-data" method="post">
                         <div class="form-group">
                             <label class="label-product-form">Mã quảng cáo</label>
                             <input type="text" class="form-control" name="id" value="<%=advertisement.id%>" placeholder="" id="productId" readonly="readonly">
@@ -66,15 +66,15 @@
 
                     <div style="margin-bottom: 64px;">
                         <% if (advertisement.status=='locked' ){%>
-                            <form action="/advertisements/unlock?id=<%=advertisement.id%>" method="post">
+                            <form action="/banners/unlock?id=<%=advertisement.id%>" method="post">
                                 <button style="background-color: rgb(255, 136, 0); border-color: #F01D4F; display: inline; border: 0px; margin-bottom: 16px;" type="submit" class="button">Mở khóa</button>
                             </form>
                             <% } else { %>
-                                <form action="/advertisements/lock?id=<%=advertisement.id%>" method="post">
+                                <form action="/banners/lock?id=<%=advertisement.id%>" method="post">
                                     <button style="background-color: rgb(255, 136, 0); border-color: #F01D4F; display: inline; border: 0px; margin-bottom: 16px;" type="submit" class="button">Khóa</button>
                                 </form>
                                 <% } %>
-                                    <form action="/advertisements/remove?id=<%=advertisement.id%>" method="post" style="display: inline;">
+                                    <form action="/banners/remove?id=<%=advertisement.id%>" method="post" style="display: inline;">
                                         <button style="background-color: #F01D4F; border-color: #F01D4F; display: inline; border: 0px;" type="submit" value="submit" class="button">Xóa</button>
                                     </form>
                     </div>
