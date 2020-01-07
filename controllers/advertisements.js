@@ -6,14 +6,10 @@ initializeAdmin(passportAdmin);
 var adminModel = require('../models/admin')
 var userModel = require('../models/user')
 var productModel = require('../models/product')
-var advertisementModel = require('../models/banner')
-var typeModel = require('../models/type')
+var advertisementModel = require('../models/advertisement')
 
 var formidable = require('formidable')
-var appRoot = require('app-root-path')
-var http = require('http')
-var util = require('util')
-var base64Img = require('base64-img');
+
 
 module.exports.advertisementList = function(req, res) {
 

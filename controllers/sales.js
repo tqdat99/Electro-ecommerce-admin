@@ -6,7 +6,7 @@ initializeAdmin(passportAdmin);
 var adminModel = require('../models/admin')
 var userModel = require('../models/user')
 var productModel = require('../models/product')
-var advertisementModel = require('../models/banner')
+var advertisementModel = require('../models/advertisement')
 var typeModel = require('../models/type')
 var saleModel = require('../models/sale')
 
